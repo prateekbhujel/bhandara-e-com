@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index')->middleware('auth:cms');
+
+Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login.show');
 
 Route::get('/', function () {
     return to_route('admin.dashboard.index');
