@@ -14,7 +14,8 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <form action="" method="post">
+                    <form action="{{ route('admin.login.check') }}" method="post">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label"> Email: </label>
                             <input type="email" name="email" id="email" class="form-control" required>
@@ -29,7 +30,7 @@
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-dark">
-                                <i class="fa-solid fa-arrow-right me-2"></i>Log In
+                                <i class="fa-solid fa-right-to-bracket me-2"></i>Log In
                             </button>
                         </div>
                     </form>

@@ -3019,6 +3019,9 @@ function withinMaxClamp(min, value, max) {
 
 window.jQuery = window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+$(function () {
+  $('.toast').toast('show');
+});
 
 /***/ }),
 

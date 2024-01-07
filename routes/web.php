@@ -19,6 +19,8 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login.show');
 
+Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.check');
+
 Route::get('/', function () {
     return to_route('admin.dashboard.index');
 });
