@@ -13,13 +13,33 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
+                            <i class="fa-solid fa-user-circle me-2"></i> {{ auth('cms')->user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
+                                    <i class="fa-solid fa-user-edit me-2"></i>Edit Profile
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fa-solid fa-asterisk me-2"></i>Change Password
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form action="{{ route('admin.logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link-dropdown-item">
+                                       <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 </ul>
