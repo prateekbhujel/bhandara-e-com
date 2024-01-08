@@ -24,7 +24,7 @@
                             </li>
                             
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('admin.password.edit') }}">
                                     <i class="fa-solid fa-asterisk me-2"></i>Change Password
                                 </a>
                             </li>

@@ -22,7 +22,7 @@
                     <div class="col-5 mx-auto">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}" required>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" required>
                         </div>
                         
                         <div class="mb-3">
@@ -32,12 +32,12 @@
 
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}" required>
+                            <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $user->phone) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="addresss" class="form-label">Address</label>
-                            <textarea name="address" id="address" class="form-control">{{ $user->address }}</textarea>
+                            <textarea name="address" id="address" class="form-control">{{ old('address', $user->address) }}</textarea>
                         </div>
 
                         <div class="mb-3">

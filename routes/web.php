@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.lo
 Route::get('/admin/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
 
 Route::match(['put', 'patch'], '/admin/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
+
+Route::get('/admin/password/edit', [PasswordController::class, 'edit'])->name('admin.password.edit');
+
+Route::match(['put', 'patch'], '/admin/password/update', [PasswordController::class, 'update'])->name('admin.password.update');
+
 
 Route::get('/', function () {
     return to_route('admin.dashboard.index');
