@@ -3021,6 +3021,12 @@ window.jQuery = window.$ = __webpack_require__(/*! jquery */ "./node_modules/jqu
 __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 $(function () {
   $('.toast').toast('show');
+  $('.delete').click(function (e) {
+    e.preventDefault();
+    if (confirm('Are you sure you want to delete this item?!')) {
+      $(this).parent().submit();
+    }
+  });
 });
 
 /***/ }),
