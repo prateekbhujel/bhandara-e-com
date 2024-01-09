@@ -13,7 +13,7 @@ class StaffsController extends Controller
      */
     public function index()
     {
-        $staffs = Admin::where('type', 'staff')->get();
+        $staffs = Admin::where('type', 'staff')->paginate(10);
 
         return view('admin.staffs.index', compact('staffs'));
 

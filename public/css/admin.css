@@ -1,4 +1,7 @@
 @import url(https://fonts.bunny.net/css?family=Nunito);
+table th:last-of-type {
+    width: 170px;
+}
 @charset "UTF-8";
 /*!
  * Bootstrap  v5.3.2 (https://getbootstrap.com/)

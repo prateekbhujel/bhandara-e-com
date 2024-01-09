@@ -32,4 +32,9 @@ class LoginController extends Controller
     {
         return Auth::guard('cms');
     }
+
+    // protected function credentials(Request $request)
+    // {
+    //     return array_merge($request->only($this->username(), 'password'), ['status' => 'Active']);
+    // }
 }
