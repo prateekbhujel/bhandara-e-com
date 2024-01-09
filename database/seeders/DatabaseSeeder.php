@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Admin;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +25,8 @@ class DatabaseSeeder extends Seeder
 
         // $this->call([AdminSeeder::class]);
 
-        Admin::factory(100)->create();
+        // Admin::factory(100)->create();
+        Brand::factory(10)->create();
+        Category::factory(10)->create();
     }
 }

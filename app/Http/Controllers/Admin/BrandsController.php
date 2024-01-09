@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BrandsController extends Controller
 {
@@ -57,7 +58,7 @@ class BrandsController extends Controller
     public function update(Request $request, Brand $brand)
     {
         $brand->update($request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('brands', 'name')->whereNot('name', $brand->name)],
             'status' => 'required|in:Active,Inactive'
         ]));
 

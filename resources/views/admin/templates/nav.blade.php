@@ -24,9 +24,16 @@
 
                         <li class="nav-item">
                             <a class="nav-link nav-item {{ request()->routeIs('admin.brands.index') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}">
-                                <i class="fa-solid fa-th-list me-2"></i>Brands
+                                <i class="fa-solid fa-star me-2"></i>Brands
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-item {{ request()->routeIs('admin.products.index') ? 'active' : '' }}" href="{{ route('admin.products.index') }}">
+                                <i class="fa-solid fa-gifts me-2"></i>Products
+                            </a>
+                        </li>
+                        
                     @endif
                 </ul>
 

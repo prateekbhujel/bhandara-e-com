@@ -13,4 +13,9 @@ class Category extends Model
         'name', 
         'status'
     ];
+
+    public function products()
+    {
+        $this->hasMany(Product::class); //Category belongs to many products
+    }
 }

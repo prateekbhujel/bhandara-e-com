@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PasswordController;
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StaffsController;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +32,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
             Route::resource('staffs', StaffsController::class)->except(['show'])->middleware('admin-access');
 
-            Route::resource('categories', CategoriesController::class)->except(['show']);
-
-            Route::resource('brands', BrandsController::class)->except(['show']);
+            Route::resources([
+                'categories' => CategoriesController::class,  
+                'brands'     => BrandsController::class, 
+                'products'   => ProductsController::class,
+            ], [
+                'except'     => ['show']
+            ]);
         
         });
 

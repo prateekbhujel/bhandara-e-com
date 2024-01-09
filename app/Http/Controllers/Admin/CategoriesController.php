@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoriesController extends Controller
 {
@@ -58,7 +59,7 @@ class CategoriesController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->update($request->validate([
-            'name' => 'required',
+            'name' => ['required', Rule::unique('categories', 'name')->whereNot('name', $category->name)],
             'status' => 'required|in:Active,Inactive'
         ]));
 
