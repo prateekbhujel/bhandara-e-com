@@ -26,6 +26,10 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Category</th>
+                                    <th>Brands</th>
+                                    <th>Price</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
@@ -36,6 +40,19 @@
                                 @foreach ($products as $product)
                                     <tr>
                                         <td>{{ $product->name }}</td>
+                                        <td>
+                                            <img src="{{ url("public/storage/images/{$product->thumbnail}") }}" class="img-sm">
+                                        </td>
+                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->brand->name }}</td>
+                                        <td>
+                                            @if ($product->discounted_price)
+                                                <small class="text-decoration-line-through fst-italic text-muted">Rs. {{ number_format($product->price) }}</small><br>
+                                                Rs. {{ number_format($product->discounted_price) }}
+                                            @else
+                                                Rs. {{ number_format($product->price) }}
+                                            @endif
+                                        </td>
                                         <td>{{ $product->status }}</td>
                                         <td>{{ $product->created_at->toDayDateTimeString() }}</td>
                                         <td>{{ $product->updated_at->toDayDateTimeString() }}</td>

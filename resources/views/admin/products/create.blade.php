@@ -26,12 +26,12 @@
 
                         <div class="mb-3">
                             <label for="summary" class="form-label">Summary</label>
-                            <textarea name="summary" id="summary" class="form-control" required>{{ old('summary') }}</textarea>
+                            <textarea name="summary" id="summary" class="editor" required>{{ old('summary') }}</textarea>
                         </div>                        
                         
                         <div class="mb-3">
                             <label for="details" class="form-label">Details</label>
-                            <textarea name="details" id="details" class="form-control" required>{{ old('details') }}</textarea>
+                            <textarea name="details" id="details" class="editor" required>{{ old('details') }}</textarea>
                         </div>
 
                         <div class="mb-3">
@@ -46,9 +46,11 @@
 
                         <div class="mb-3">
                             <label for="images" class="form-label">Images</label>
-                            <input type="file" name="images[]" id="images" class="form-control" accept="image/*" required>
+                            <input type="file" name="images[]" id="images" class="form-control" accept="image/*" multiple required>
                         </div>
                         
+                        <div class="row mt-3" id="img-container"></div>
+
                         <div class="mb-3">
                             <label for="product">Category</label>
                             <select name="category_id" id="category_id" class="form-select" required>
