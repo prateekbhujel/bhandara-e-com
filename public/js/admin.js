@@ -3026,7 +3026,7 @@ __webpack_require__(/*! trumbowyg */ "./node_modules/trumbowyg/dist/trumbowyg.js
 $(function () {
   $('.toast').toast('show');
   $('.editor').trumbowyg({
-    svgPath: route('front.pages.index') + '../../node_modules/trumbowyg/dist/ui/icons.svg'
+    svgPath: route('front.pages.index') + '/node_modules/trumbowyg/dist/ui/icons.svg'
   });
   $('.delete').click(function (e) {
     e.preventDefault();
@@ -3057,13 +3057,23 @@ $(function () {
       var id = $(this).data('id');
       var file = $(this).data('file');
       var csrf_token = $("meta[name='csrf_token']").attr('content');
+      var msg = '';
+      var img_col = $(this).parents('.col-4').first();
       $.ajax({
         url: route('admin.products.image', [id, file]),
         method: 'delete',
         data: {
           _token: csrf_token
         }
-      }).done().fail();
+      }).done(function (resp) {
+        img_col.remove();
+        msg = "<div class=\"toast align-items-center text-bg-success border-0 mt-3\" role=\"alert\" aria-live=\"assertive\" araia-atomic=\"true\">\n                            <div class=\"d-flex\">\n                                <div class=\"toast-body\">\n                                    ".concat(resp.success, "\n                                </div>\n                                <button type=\"button\" class=\"btn-close-white me-2 auto\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n                            </div>\n                      </div>");
+      }).fail(function (resp) {
+        msg = "<div class=\"toast align-items-center text-bg-danger border-0 mt-3\" role=\"alert\" aria-live=\"assertive\" araia-atomic=\"true\">\n                            <div class=\"d-flex\">\n                                <div class=\"toast-body\">\n                                    ".concat(JSON.parse(resp.responseText).error, "\n                                </div>\n                                <button type=\"button\" class=\"btn-close-white me-2 auto\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n                            </div>\n                        </div>");
+      }).always(function () {
+        $('#toast-container').html(msg);
+        $('.toast').toast('show');
+      });
     }
   });
 });

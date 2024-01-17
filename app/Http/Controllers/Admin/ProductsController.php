@@ -82,7 +82,36 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated =  $request->validate([
+            'name'             => 'required|string',
+            'summary'          => 'required|string',
+            'details'          => 'required|string',
+            'price'            => 'required|numeric',
+            'discounted_price' => 'nullable|numeric',
+            'category_id'      => 'required|exists:categories,id',
+            'brand_id'         => 'required|exists:brands,id',
+            'images'           => 'required|array',
+            'images.*'         => 'required|image',
+        ]);
+        
+        $images = $product->images;
+        if($request->hasFile('images')) {
+            foreach($request->images as $image) {
+                $filename = "img" . date('YmdHis') . rand(1000, 9999) . "." .$image->extension();
+
+                $img = (new Image(new Driver))->read($image);
+
+                $img->scaleDown(1280, 720)->save(storage_path("app/public/images/$filename"));
+
+                $images[] = $filename;
+            }
+        }
+
+        $validated['images'] = $images;
+
+        $product->update($validated);
+
+        return to_route('admin.products.index')->with('success', 'Product Updated.');
     }
 
     /**
@@ -90,7 +119,13 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        foreach($product->images as $image) {
+            @unlink(storage_path("app/public/images/$image"));
+        }
+
+        $product->delete();
+
+        return to_route('admin.products.index')->with('success', 'Product Removed.');
 
     }//End Method
 
@@ -104,9 +139,11 @@ class ProductsController extends Controller
 
             $product->update(['images' => $images]);
 
-            return response('Ok')->with('','');
+            return response(['success' => 'Image Removed']);
+
         }else
         {
+            return response(['error' => 'At least one image is required.'], 400);
 
         }
 
