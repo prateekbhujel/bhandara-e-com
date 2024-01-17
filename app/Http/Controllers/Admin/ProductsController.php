@@ -93,4 +93,22 @@ class ProductsController extends Controller
         //
 
     }//End Method
+
+    public function image(Product $product, string $filename)
+    {
+        if(count($product->images) > 1)
+        {
+            @unlink(storage_path("images/$filename"));
+
+            $images = array_diff($product->images, [$filename]);
+
+            $product->update(['images' => $images]);
+
+            return response('Ok')->with('','');
+        }else
+        {
+
+        }
+
+    }//End Method
 }

@@ -39,7 +39,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
             ], [
                 'except'     => ['show']
             ]);
-        
+
+            Route::delete('/products/{product}/image/{filename}', [ProductsController::class, 'image'])->name('products.image');
+
         });
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -59,6 +61,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
 
 Route::get('/', function () {
     return to_route('admin.dashboard.index');
-});
+})->name('front.pages.index');
 
 // Auth::routes();
