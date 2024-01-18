@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StaffsController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /** 
@@ -36,6 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
                 'categories' => CategoriesController::class,  
                 'brands'     => BrandsController::class, 
                 'products'   => ProductsController::class,
+                'users'   => UsersController::class,
             ], [
                 'except'     => ['show']
             ]);

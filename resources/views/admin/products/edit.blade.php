@@ -33,7 +33,7 @@
 
                         <div class="mb-3">
                             <label for="details" class="form-label">Details</label>
-                            <textarea name="details" id="details" class="editor" value="{{ old('details'. $product->details) }}" required></textarea>
+                            <textarea name="details" id="details" class="editor" required> {{ old('summary', $product->details) }}</textarea>
                         </div>
                         
                         <div class="mb-3">
@@ -56,7 +56,7 @@
                             <div class="col-4 mt-3">
                                 <div class="row">
                                     <div class="col-12">
-                                        <img src="{{ ulr("public/storage/images/$image") }}" class="img-fluid">
+                                        <img src="{{ url("public/storage/images/$image") }}" class="img-fluid">
                                     </div>
                                     <div class="col-12 mt-3 text-center">
                                         <button type="button" class="btn btn-danger btn-sm img-delete" data-id="{{ $product->id }}" data-file="{{ $image }}">

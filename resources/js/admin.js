@@ -50,7 +50,6 @@ $(function () {
                 data: {
                     _token: csrf_token
                 }
-                
             }).done(function(resp){
                 img_col.remove();
                 msg= `<div class="toast align-items-center text-bg-success border-0 mt-3" role="alert" aria-live="assertive" araia-atomic="true">

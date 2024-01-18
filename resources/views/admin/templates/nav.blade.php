@@ -33,6 +33,12 @@
                                 <i class="fa-solid fa-gifts me-2"></i>Products
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-item {{ request()->routeIs('admin.users.index') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                                <i class="fa-solid fa-user-friends me-2"></i>Users
+                            </a>
+                        </li>
                         
                     @endif
                 </ul>
