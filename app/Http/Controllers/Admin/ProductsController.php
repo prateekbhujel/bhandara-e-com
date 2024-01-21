@@ -45,6 +45,8 @@ class ProductsController extends Controller
             'brand_id'         => 'required|exists:brands,id',
             'images'           => 'required|array',
             'images.*'         => 'required|image',
+            'status'           => 'required|in:Active,Inactive',
+            'featured'         => 'required|in:Yes,No',
         ]);
 
         $images =[];
@@ -90,8 +92,10 @@ class ProductsController extends Controller
             'discounted_price' => 'nullable|numeric',
             'category_id'      => 'required|exists:categories,id',
             'brand_id'         => 'required|exists:brands,id',
-            'images'           => 'required|array',
-            'images.*'         => 'required|image',
+            'images'           => 'nullable|array',
+            'images.*'         => 'nullable|image',
+            'status'           => 'required|in:Active,Inactive',
+            'featured'         => 'required|in:Yes,No',
         ]);
         
         $images = $product->images;
@@ -135,7 +139,7 @@ class ProductsController extends Controller
         {
             @unlink(storage_path("images/$filename"));
 
-            $images = array_diff($product->images, [$filename]);
+            $images = array_values(array_diff($product->images, [$filename]));
 
             $product->update(['images' => $images]);
 
@@ -144,7 +148,6 @@ class ProductsController extends Controller
         }else
         {
             return response(['error' => 'At least one image is required.'], 400);
-
         }
 
     }//End Method

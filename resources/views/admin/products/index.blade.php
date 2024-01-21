@@ -31,6 +31,7 @@
                                     <th>Brands</th>
                                     <th>Price</th>
                                     <th>Status</th>
+                                    <th>Featured</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
@@ -54,6 +55,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $product->status }}</td>
+                                        <td>{{ $product->featured }}</td>
                                         <td>{{ $product->created_at->toDayDateTimeString() }}</td>
                                         <td>{{ $product->updated_at->toDayDateTimeString() }}</td>
                                         <td>

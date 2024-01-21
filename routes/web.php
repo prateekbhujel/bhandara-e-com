@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Front\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /** 
@@ -61,8 +62,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 });//End Admin Routes Group.
 
 
-Route::get('/', function () {
-    return to_route('admin.dashboard.index');
-})->name('front.pages.index');
+//Front Page Routes
+Route::get('/', [PagesController::class, 'index'])->name('front.pages.index');//End of Front Page Route
 
 // Auth::routes();

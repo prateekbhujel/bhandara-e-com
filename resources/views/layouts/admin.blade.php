@@ -9,6 +9,7 @@
     <title>@yield('title') - {{ config('app.name') }} CMS</title>
 
     <link rel="stylesheet" href="{{ url('public/css/admin.css') }}">
+    
     @routes
 </head>
 

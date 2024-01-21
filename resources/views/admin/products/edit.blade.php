@@ -92,7 +92,15 @@
                                 <option value="Inactive" @selected($product->status == 'Inactive')>Inactive</option>
                             </select>
                         </div>
-
+                        
+                        <div class="mb-3">
+                            <label for="featured" class="form-label">Featured</label>
+                            <select name="featured" id="featured" class="form-select" required>
+                                <option value="Yes" @selected($product->featured == 'Yes')>Yes</option>
+                                <option value="No" @selected($product->featured == 'No')>No</option>
+                            </select>
+                        </div>
+                        
                         <div class="mb-3">
                             <button type="submit" class="btn btn-dark btn-sm">
                                 <i class="fa-solid fa-save me-2"></i>Save
