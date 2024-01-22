@@ -60,11 +60,11 @@
                             </div>
                         </div>
                         <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
-                            <form action="#">
+                            <form action="{{ route('front.pages.search') }}" method="GET">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="search" class="form-control border-dark" placeholder="Search..." required>
-                                        <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+                                        <input type="search" class="form-control border-dark" placeholder="Search..." name="term" value="{{ request()->term }}" required>
+                                        <button class="btn btn-outline-dark" type="submit"><i class="fas fa-search"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -80,52 +80,7 @@
                         </div>
                     </div>
 
-                    <!-- Nav -->
-                    <div class="row">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-white col-12">
-                            <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="mainNav">
-                                <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="electronics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Electronics</a>
-                                        <div class="dropdown-menu" aria-labelledby="electronics">
-                                            <a class="dropdown-item" href="category.html">Computers</a>
-                                            <a class="dropdown-item" href="category.html">Mobile Phones</a>
-                                            <a class="dropdown-item" href="category.html">Television Sets</a>
-                                            <a class="dropdown-item" href="category.html">DSLR Cameras</a>
-                                            <a class="dropdown-item" href="category.html">Projectors</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="fashion" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fashion</a>
-                                        <div class="dropdown-menu" aria-labelledby="fashion">
-                                            <a class="dropdown-item" href="category.html">Men's</a>
-                                            <a class="dropdown-item" href="category.html">Women's</a>
-                                            <a class="dropdown-item" href="category.html">Children's</a>
-                                            <a class="dropdown-item" href="category.html">Accessories</a>
-                                            <a class="dropdown-item" href="category.html">Footwear</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="books" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Books</a>
-                                        <div class="dropdown-menu" aria-labelledby="books">
-                                            <a class="dropdown-item" href="category.html">Adventure</a>
-                                            <a class="dropdown-item" href="category.html">Horror</a>
-                                            <a class="dropdown-item" href="category.html">Romantic</a>
-                                            <a class="dropdown-item" href="category.html">Children's</a>
-                                            <a class="dropdown-item" href="category.html">Non-Fiction</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                    <!-- Nav -->
+                    @include('front.templates.nav')
 
                 </div>
                 <!-- Header -->

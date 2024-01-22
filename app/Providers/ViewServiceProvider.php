@@ -24,7 +24,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         
-        View::composer(['admin.products.create', 'admin.products.edit'], function($view) {
+        View::composer(['admin.products.create', 'admin.products.edit', 'front.templates.nav'], function($view) {
             $categories = Category::whereStatus('Active')->select('id', 'name')->get();
             $brands = Brand::whereStatus('Active')->select('id', 'name')->get();
 

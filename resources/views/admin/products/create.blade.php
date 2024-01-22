@@ -72,16 +72,16 @@
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="form-select" required>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
+                                <option value="Active" {{ old('status') == 'Active' ? "selected" : "" }}>Active</option>
+                                <option value="Inactive" {{ old('status') == 'Inactive' ? "selected" : "" }}>Inactive</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label for="featured" class="form-label">Featured</label>
                             <select name="featured" id="featured" class="form-select" required>
-                                <option value="Yes" @selected($product->featured == 'Yes')>Yes</option>
-                                <option value="No" @selected($product->featured == 'No')>No</option>
+                                <option value="No" {{ old('featured') == 'No' ? "selected" : "" }}>No</option>
+                                <option value="Yes" {{ old('featured') == 'Yes' ? "selected" : "" }}>Yes</option>
                             </select>
                         </div>
                         
