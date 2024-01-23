@@ -50,4 +50,14 @@ class PagesController extends Controller
         return view('front.pages.search', compact('products'));
 
     }//End Method
+
+    public function product(Product $product)
+    {
+        $similars = Product::whereStatus('Active')->where('id', '!=', $product->id)
+                            ->whereCategoryId($product->category_id)
+                            ->take(4)->inRandomOrder()->get();
+
+        return view('front.pages.product' , compact('product' , 'similars'));
+
+    }//End Method
 }

@@ -68,6 +68,7 @@ Route::name('front.')->group(function(){
     Route::controller(PagesController::class)->group(function() {
         Route::get('/category/{category}', 'category')->name('pages.category');
         Route::get('/brand/{brand}', 'brand')->name('pages.brand');
+        Route::get('/product/{product}', 'product')->name('pages.product');
         Route::get('/search', 'search')->name('pages.search');
         Route::get('/','index')->name('pages.index');
         
