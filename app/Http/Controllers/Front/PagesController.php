@@ -38,7 +38,14 @@ class PagesController extends Controller
 
     public function search(Request $request)
     {
-        $products = Product::whereStatus('Active')->where('name', 'like', '%' . $request->term . '%')->paginate(24);
+        $products = Product::whereStatus('Active')->where(function($query) use ($request) {
+            $query->where('name','like', '%' . $request->term . '%')
+                  ->orWhereHas('category', function($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->term . '%');
+                })->orWherehas('brand', function($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->term . '%');
+                });
+        })->paginate(24);
 
         return view('front.pages.search', compact('products'));
 
