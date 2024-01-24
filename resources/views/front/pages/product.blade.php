@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
-                                <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus me-2"></i>Add to cart</button>
+                                <button class="btn btn-outline-dark add-to-cart" data-id="{{ $product->id }}" type="button"><i class="fas fa-cart-plus me-2"></i>Add to cart</button>
                             </div>
                             <div class="col-12 mt-3">
                                 <button class="btn btn-outline-secondary btn-sm" type="button"><i class="fas fa-heart me-2"></i>Add to wishlist</button>

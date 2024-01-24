@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
 //Front Page Routes
 Route::name('front.')->group(function(){
    
+    Route::controller(CartController::class)->group(function() {
+        Route::post('/cart/{product}/{qty}', 'store')->name('cart.store');
+    });
+
     Route::controller(PagesController::class)->group(function() {
         Route::get('/category/{category}', 'category')->name('pages.category');
         Route::get('/brand/{brand}', 'brand')->name('pages.brand');

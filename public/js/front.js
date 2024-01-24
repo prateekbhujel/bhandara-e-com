@@ -18309,6 +18309,21 @@ $(function () {
     setImgLarge();
     setImgSmall();
   });
+  $('.add-to-cart').click(function () {
+    var id = $(this).data(id); //takes data-id attributes data
+    var csrf_token = $("meta[name=csrf_token]").attr("content"); //taking csrf toke from front.blade.php meta attr
+    var qty = 1;
+    if ($('#qty').length) {
+      qty = $('#qty').val();
+    }
+    $.ajax({
+      url: route('front.cart.store', [id, qty]),
+      data: {
+        csrf_token: csrf_token
+      },
+      method: 'POST'
+    });
+  });
   setImgLarge();
   setImgSmall();
 });
@@ -18322,6 +18337,9 @@ function setImgSmall() {
   var width = imgSmall.width();
   imgSmall.height(width);
 }
+
+//Add to cart Method
+$(function () {});
 })();
 
 /******/ })()

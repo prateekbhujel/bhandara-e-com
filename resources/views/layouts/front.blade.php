@@ -30,10 +30,10 @@
                         <div class="col-auto me-auto">
                             <ul class="top-nav">
                                 <li>
-                                    <a href="tel:+123-456-7890"><i class="fa fa-phone-square me-2"></i>+123-456-7890</a>
+                                    <a href="tel:+977-9862500130"><i class="fa fa-phone-square me-2"></i>+977-9862500130</a>
                                 </li>
                                 <li>
-                                    <a href="mailto:mail@ecom.com"><i class="fa fa-envelope me-2"></i>mail@ecom.com</a>
+                                    <a href="mailto:prateekbhujelpb@gmail.com"><i class="fa fa-envelope me-2"></i>prateekbhujelpb@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
@@ -99,13 +99,13 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="footer-logo">
-                                        <a href="index.html">E-Commerce</a>
+                                        <a href="{{ route('front.pages.index') }}">{{ config('app.name') }}</a>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <address>
-                                        221B Baker Street<br>
-                                        London, England
+                                        Bargachhi<br>
+                                        Biratnagar, Nepal
                                     </address>
                                 </div>
                                 <div class="col-12">
