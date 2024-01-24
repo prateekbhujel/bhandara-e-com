@@ -68,6 +68,7 @@ Route::name('front.')->group(function(){
    
     Route::controller(CartController::class)->group(function() {
         Route::post('/cart/{product}/{qty}', 'store')->name('cart.store');
+        Route::post('/cart/total', 'total')->name('cart.total');
     });
 
     Route::controller(PagesController::class)->group(function() {

@@ -41,9 +41,10 @@ $(function() {
         setImgSmall();
     });
 
-    $('.add-to-cart').click(function(){
-        let id = $(this).data(id); //takes data-id attributes data
-        let csrf_token = $("meta[name=csrf_token]").attr("content");//taking csrf toke from front.blade.php meta attr
+    //Add to cart Method
+    $('.add-to-cart').click(function() {
+        let id = $(this).data(id);
+        let csrf_token = $("meta[name='csrf_token']").attr('content');
         let qty = 1;
         
         if($('#qty').length) {
@@ -52,12 +53,18 @@ $(function() {
         
         $.ajax({
             url: route('front.cart.store', [id, qty]),
-            data: {csrf_token},
+            data: {
+                _token: csrf_token
+            },
             method: 'POST'
         });
-
     });
     
+    function loadTotal()
+    {
+        $.get()
+    }
+
     setImgLarge();
     setImgSmall();
 
@@ -74,7 +81,3 @@ function setImgSmall() {
     var width = imgSmall.width();
     imgSmall.height(width);
 }
-
-//Add to cart Method
-$(function(){
-});
