@@ -18278,6 +18278,7 @@ var __webpack_exports__ = {};
 window.jQuery = window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 $(function () {
+  loadTotal();
   $('.toast').toast('show');
   $('.nav-item.dropdown').mouseenter(function () {
     $(this).addClass('show');
@@ -18317,6 +18318,7 @@ $(function () {
     var qty = 1;
     if ($('#qty').length) {
       qty = $('#qty').val();
+      $('#qty').val(1);
     }
     $.ajax({
       url: route('front.cart.store', [id, qty]),
@@ -18324,10 +18326,18 @@ $(function () {
         _token: csrf_token
       },
       method: 'POST'
+    }).done(function (resp) {
+      msg = "<div class=\"toast align-items-center text-bg-success border-0 mt-3\" role=\"alert\" aria-live=\"assertive\" araia-atomic=\"true\">\n                            <div class=\"d-flex\">\n                                <div class=\"toast-body\">\n                                    ".concat(resp.success, "\n                                </div>\n                                <button type=\"button\" class=\"btn-close-white me-2 auto\" data-bs-dismiss=\"toast\" aria-label=\"Close\"></button>\n                            </div>\n                      </div>");
+      $("#toast-container").html(msg);
+      $(".toast").toast('show');
+      loadTotal();
     });
   });
   function loadTotal() {
-    $.get();
+    $.get(route('front.cart.total')).done(function (resp) {
+      $("#header-qty").html(resp.qty);
+      $("#header-price").html("Rs. ".concat(resp.price));
+    });
   }
   setImgLarge();
   setImgSmall();

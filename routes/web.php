@@ -67,8 +67,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
 Route::name('front.')->group(function(){
    
     Route::controller(CartController::class)->group(function() {
+        Route::get('/cart', 'index')->name('cart.index');
         Route::post('/cart/{product}/{qty}', 'store')->name('cart.store');
-        Route::post('/cart/total', 'total')->name('cart.total');
+        Route::match(['put', 'patch'], '/cart/update', 'update')->name('cart.update');
+        Route::get('/cart/total', 'total')->name('cart.total');
     });
 
     Route::controller(PagesController::class)->group(function() {

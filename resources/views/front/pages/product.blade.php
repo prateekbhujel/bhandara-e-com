@@ -295,36 +295,35 @@
                     <div class="row">
 
                         <!-- Product -->
-                        @foreach ($similars as $product)
+                        @foreach ($similars as $similar)
                             <div class="col-lg-3 col-sm-6 my-3">
                                 <div class="col-12 bg-white text-center h-100 product-item">
-                                    <span class="new">New</span>
                                     <div class="row h-100">
                                         <div class="col-12 p-0 mb-3">
-                                            <a href="{{ route('front.pages.product', [$product->id]) }}">
-                                                <img src={{ url("public/storage/images/{$product->thumbnail}") }} class="img-fluid">
+                                            <a href="{{ route('front.pages.product', [$similar->id]) }}">
+                                                <img src={{ url("public/storage/images/{$similar->thumbnail}") }} class="img-fluid">
                                             </a>
                                         </div>
                                         <div class="col-12 mb-3">
-                                            <a href="{{ route('front.pages.product', [$product->id]) }}" class="product-name">{{ $product->name }}</a>
+                                            <a href="{{ route('front.pages.product', [$similar->id]) }}" class="product-name">{{ $similar->name }}</a>
                                         </div>
                                         <div class="col-12 mb-3">
-                                            @if (!is_null($product->discounted_price))                                                
+                                            @if (!is_null($similar->discounted_price))                                                
                                                 <span class="product-price-old">
-                                                   Rs. {{ number_format($product->discounted_price) }}
+                                                   Rs. {{ number_format($similar->discounted_price) }}
                                                 </span>
                                                 <br>
                                                 <span class="product-price">
-                                                    Rs. {{ number_format($product->price) }}
+                                                    Rs. {{ number_format($similar->price) }}
                                                 </span>
                                             @else
                                                 <span class="product-price">
-                                                    Rs. {{ number_format($product->price) }}
+                                                    Rs. {{ number_format($similar->price) }}
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="col-12 mb-3 align-self-end">
-                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus me-2"></i>Add to cart</button>
+                                            <button class="btn btn-outline-dark add-to-cart" data-id="{{ $similar->id }}" type="button"><i class="fas fa-cart-plus me-2"></i>Add to cart</button>
                                         </div>
                                     </div>
                                 </div>

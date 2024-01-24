@@ -2,6 +2,8 @@ window.jQuery = window.$ = require('jquery')
 require('bootstrap')
 
 $(function() {
+    
+    loadTotal();
 
     $('.toast').toast('show');
 
@@ -49,6 +51,8 @@ $(function() {
         
         if($('#qty').length) {
             qty = $('#qty').val();
+
+            $('#qty').val(1);
         }
         
         $.ajax({
@@ -57,12 +61,32 @@ $(function() {
                 _token: csrf_token
             },
             method: 'POST'
+        }).done(function(resp) {
+            msg= `<div class="toast align-items-center text-bg-success border-0 mt-3" role="alert" aria-live="assertive" araia-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    ${resp.success}
+                                </div>
+                                <button type="button" class="btn-close-white me-2 auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                      </div>`;
+            
+            $("#toast-container").html(msg);
+            
+            $(".toast").toast('show');
+
+            loadTotal();
+
         });
     });
     
     function loadTotal()
     {
-        $.get()
+        $.get(route('front.cart.total'))
+        .done(function(resp) {
+           $("#header-qty").html(resp.qty)
+           $("#header-price").html(`Rs. ${resp.price}`) 
+        })
     }
 
     setImgLarge();
