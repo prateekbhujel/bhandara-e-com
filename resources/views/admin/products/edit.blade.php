@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="row">
-                <form action="{{ route('admin.products.update', [$product->id]) }}" method="post">
+                <form action="{{ route('admin.products.update', [$product->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
 
@@ -50,7 +50,9 @@
                             <label for="images" class="form-label">Images</label>
                             <input type="file" name="images[]" id="images" class="form-control" accept="image/*" multiple>
                         </div>
+
                         <div class="row mt-3" id="img-container"></div>
+
                         <div class="row">
                             @foreach($product->images as $image)
                             <div class="col-4 mt-3">
