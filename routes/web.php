@@ -79,6 +79,7 @@ Route::name('front.')->group(function(){
         Route::get('/category/{category}', 'category')->name('pages.category');
         Route::get('/brand/{brand}', 'brand')->name('pages.brand');
         Route::get('/product/{product}', 'product')->name('pages.product');
+        Route::post('/product/{product}/review', 'review')->name('pages.review')->middleware('auth');
         Route::get('/search', 'search')->name('pages.search');
         Route::get('/','index')->name('pages.index');
         

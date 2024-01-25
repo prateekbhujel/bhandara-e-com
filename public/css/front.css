@@ -301,7 +301,7 @@ a.product-name:hover, a.product-name:focus {
 }
 
 .ratings label:before {
-    font-family: "Font Awesome 5 Free", fantasy;
+    font-family: "Font Awesome 6 Free", fantasy;
     content: '\f005';
     font-size: 20px;
     margin-right: 3px;

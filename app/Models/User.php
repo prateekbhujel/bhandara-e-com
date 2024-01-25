@@ -52,4 +52,12 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
         
     }//End Method   
+
+
+    public function reviews()
+    { 
+
+        return $this->hasMany(Review::class);
+
+    }//End Method
 }

@@ -180,28 +180,34 @@
                                 <h4>Add Review</h4>
                             </div>
                             <div class="col-12">
-                                <form>
-                                    <div class="mb-3">
-                                        <textarea class="form-control" placeholder="Give your review"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex ratings justify-content-end flex-row-reverse">
-                                            <input type="radio" value="5" name="rating" id="rating-5"><label
-                                                for="rating-5"></label>
-                                            <input type="radio" value="4" name="rating" id="rating-4"><label
-                                                for="rating-4"></label>
-                                            <input type="radio" value="3" name="rating" id="rating-3"><label
-                                                for="rating-3"></label>
-                                            <input type="radio" value="2" name="rating" id="rating-2"><label
-                                                for="rating-2"></label>
-                                            <input type="radio" value="1" name="rating" id="rating-1" checked><label
-                                                for="rating-1"></label>
+                                @auth
+                                    <form action="{{ route('front.pages.review', [$product->id]) }}" method="POST">
+                                        @csrf
+
+                                        <div class="mb-3">
+                                            <textarea class="form-control" name="content" placeholder="Give your review">{{ old('content') }}</textarea>
                                         </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-outline-dark">Add Review</button>
-                                    </div>
-                                </form>
+                                        <div class="mb-3">
+                                            <div class="d-flex ratings justify-content-end flex-row-reverse">
+                                                <input type="radio" value="5" name="rating" id="rating-5"><label
+                                                    for="rating-5"></label>
+                                                <input type="radio" value="4" name="rating" id="rating-4"><label
+                                                    for="rating-4"></label>
+                                                <input type="radio" value="3" name="rating" id="rating-3"><label
+                                                    for="rating-3"></label>
+                                                <input type="radio" value="2" name="rating" id="rating-2"><label
+                                                    for="rating-2"></label>
+                                                <input type="radio" value="1" name="rating" id="rating-1" checked><label
+                                                    for="rating-1"></label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-dark">Add Review</button>
+                                        </div>
+                                    </form>
+                                @else
+                                    <h6 class="text-muted fst-italic"> Please <a class="text-decoration-none" href="{{ route('login') }}">Log In </a>to add Your Review in ths prdouct.</h6>
+                                @endif
                             </div>
                         </div>
                         <!-- Add Review -->

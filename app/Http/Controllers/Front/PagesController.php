@@ -62,4 +62,10 @@ class PagesController extends Controller
         return view('front.pages.product' , compact('product' , 'similars'));
 
     }//End Method
+
+    public function review(Request $req, $id)
+    {
+
+
+    }//End Method
 }
