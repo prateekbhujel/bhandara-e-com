@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
+use Auth;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -66,6 +68,16 @@ class PagesController extends Controller
     public function review(Request $req, $id)
     {
 
+        $validated = $req->validate([
+            'content' => 'required|string',
+            'rating'  => 'required|numeric|min:1|max:5',
+        ]);
 
+        $validated['product_id'] = $id;
+        $validated['user_id']    = Auth::id();
+
+        Review::create($validated);
+
+        return redirect()->back()->withSuccess('Thank You For Your Rating and Review.');
     }//End Method
 }

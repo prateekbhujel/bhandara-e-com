@@ -112,55 +112,32 @@
                                     <div class="col-sm-4 text-center">
                                         <div class="row">
                                             <div class="col-12 average-rating">
-                                                4.1
+                                                {{ round($product->reviews->avg('rating'), 1) }}
                                             </div>
                                             <div class="col-12">
-                                                of 100 reviews
+                                                of {{ $product->reviews->count() }} reviews
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <ul class="rating-list mt-3">
-                                            <li>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                </div>
-                                                <div class="rating-progress-label">
-                                                    5<i class="fas fa-star ms-1"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
-                                                </div>
-                                                <div class="rating-progress-label">
-                                                    4<i class="fas fa-star ms-1"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
-                                                </div>
-                                                <div class="rating-progress-label">
-                                                    3<i class="fas fa-star ms-1"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 7%;" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100">7%</div>
-                                                </div>
-                                                <div class="rating-progress-label">
-                                                    2<i class="fas fa-star ms-1"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-dark" role="progressbar" style="width: 3%;" aria-valuenow="3" aria-valuemin="3" aria-valuemax="100">3%</div>
-                                                </div>
-                                                <div class="rating-progress-label">
-                                                    1<i class="fas fa-star ms-1"></i>
-                                                </div>
-                                            </li>
+                                            @for ($i = 5; $i >= 1; $i--)
+                                            @if($product->reviews->count() > 0)
+                                            @php
+                                                $per = $product->reviews->where('rating', $i)->count() / $product->reviews->count() * 100; //Percentage of reviews
+                                            @endphp
+                                            @else
+                                                @php($per = 0)
+                                            @endif
+                                                <li>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-dark" role="progressbar" style="width: {{ round($per, 2) }}%;" aria-valuenow="{{ round($per, 2) }}" aria-valuemin="0" aria-valuemax="100">{{ round($per, 2) }}%</div>
+                                                    </div>
+                                                    <div class="rating-progress-label">
+                                                        {{ $i }}<i class="fas fa-star ms-1"></i>
+                                                    </div>
+                                                </li>
+                                            @endfor
                                         </ul>
                                     </div>
                                 </div>
@@ -222,62 +199,37 @@
                         <div class="row">
                             <div class="col-12">
 
-                                <!-- Comments -->
-                                <div class="col-12 text-justify py-2 px-3 mb-3 bg-gray">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <strong class="me-2">Steve Rogers</strong>
-                                            <small>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </small>
-                                        </div>
-                                        <div class="col-12">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                            <br>
-                                            Fusce ligula augue, faucibus sed neque non, auctor rhoncus enim. Sed nec molestie turpis. Nullam accumsan porttitor rutrum. Curabitur eleifend venenatis volutpat.
-                                            <br>
-                                            Aenean faucibus posuere vehicula.
-                                        </div>
-                                        <div class="col-12">
-                                            <small>
-                                                <i class="fas fa-clock me-2"></i>5 hours ago
-                                            </small>
+                                @if ($product->reviews->isNotEmpty())
+
+                                @foreach ($product->reviews as $review)
+                                    <!-- Comments -->
+                                    <div class="col-12 text-justify py-2 px-3 mb-3 bg-gray">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <strong class="me-2">{{ $review->user->name }}</strong>
+                                                <small>
+                                                    @for($i = 1; $i <= 5; $i++)
+                                                        <i class="{{ $i <= $review->rating ? 'fas' : 'far' }} fa-star"></i>
+                                                    @endfor
+                                                </small>
+                                            </div>
+                                            <div class="col-12">
+                                                {!! $review->content !!}
+                                            </div>
+                                            <div class="col-12">
+                                                <small>
+                                                    <i class="fas fa-clock me-2"></i>{{ $review->created_at->diffForHumans() }}
+                                                </small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Comments -->
-
-                                <!-- Comments -->
-                                <div class="col-12 text-justify py-2 px-3 mb-3 bg-gray">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <strong class="me-2">Bucky Barns</strong>
-                                            <small>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </small>
-                                        </div>
-                                        <div class="col-12">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                            <br>
-                                            Aenean faucibus posuere vehicula.
-                                        </div>
-                                        <div class="col-12">
-                                            <small>
-                                                <i class="fas fa-clock me-2"></i>5 hours ago
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Comments -->
-
+                                    <!-- Comments -->
+                                @endforeach
+                                @else
+                                    <h6 class="text-muted fst-italic">
+                                        No review Given For this Product.
+                                    </h6>
+                                @endif
                             </div>
                         </div>
                         <!-- Review -->
