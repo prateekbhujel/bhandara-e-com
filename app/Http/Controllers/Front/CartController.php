@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
+use Auth;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -114,8 +117,39 @@ class CartController extends Controller
 
     }//End Method
 
-    public function checkout()
+    public function checkout(Request $req)
     {
+        $cart = json_decode($req->cookie('bhandara_ecom_cart'), true);
+
+        $order = Order::create(['user_id' => Auth::id()]);
+
+        foreach($cart as $id => $item)
+        {
+            $product = Product::findorFail($id);
+
+            if(!is_null($product->discounted_price)) 
+            {
+                $price = $product->discounted_price;
+                $total = $item * $price;
+
+            } else 
+            {
+                $price = $product->price;
+                $total = $item * $price;
+
+            }
+
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $id,
+                'price' => $price,
+                'qty' => $item,
+                'total' => $total,
+            ]);
+
+        }//End Foreach
+
+        return to_route('front.pages.index')->with('success', 'Thank you for your order. It is currently is been processed.')->withoutCookie('bhandara_ecom_cart');
 
     }//End Method
 
