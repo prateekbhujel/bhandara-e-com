@@ -39,12 +39,27 @@
                         </div>
                         <div class="col-auto">
                             <ul class="top-nav">
+                                @guest                                    
+                                    <li>
+                                        <a href="{{ route('register') }}"><i class="fas fa-user-edit me-2"></i>Register</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+                                    </li>
+                                @else
                                 <li>
-                                    <a href="register.html"><i class="fas fa-user-edit me-2"></i>Register</a>
+                                    <a href=""><i class="fas fa-user-circle me-2"></i>{{ auth()->user()->name }}</a>
                                 </li>
                                 <li>
-                                    <a href="login.html"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+                                    <form action="{{ route('logout') }}" method="post" class="d-inline">
+                                        @csrf
+                                        <button class="btn btn-link link-light text-decoration-none p-0">
+                                           <small> <i class="fas fa-sign-out-alt me-2"></i>Logout </small>
+                                        </button>
+                                    </form>
                                 </li>
+                                @endguest
                             </ul>
                         </div>
                     </div>
@@ -70,9 +85,6 @@
                             </form>
                         </div>
                         <div class="col-lg-auto text-center text-lg-left header-item-holder">
-                            <a href="#" class="header-item">
-                                <i class="fas fa-heart me-2"></i><span id="header-favorite">0</span>
-                            </a>
                             <a href="{{ route('front.cart.index') }}" class="header-item">
                                 <i class="fas fa-shopping-bag me-2"></i><span id="header-qty" class="me-3">0</span>
                                 

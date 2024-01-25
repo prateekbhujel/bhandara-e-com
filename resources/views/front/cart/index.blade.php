@@ -49,7 +49,7 @@
                                                     Rs. {{ number_format($item['total']) }}
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
+                                                    <a href="{{ route('front.cart.destroy', [$id]) }}" class="btn btn-link text-danger"><i class="fas fa-times"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-12 text-right">
                                     <button class="btn btn-outline-secondary me-3" type="submit">Update</button>
-                                    <a href="#" class="btn btn-outline-success">Checkout</a>
+                                    <a href="{{ route('front.cart.checkout') }}" class="btn btn-outline-success">Checkout</a>
                                 </div>
                             </form>
                         </div>

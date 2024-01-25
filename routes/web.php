@@ -71,6 +71,8 @@ Route::name('front.')->group(function(){
         Route::post('/cart/{product}/{qty}', 'store')->name('cart.store');
         Route::match(['put', 'patch'], '/cart/update', 'update')->name('cart.update');
         Route::get('/cart/total', 'total')->name('cart.total');
+        Route::get('cart/{product}/destroy', 'destroy')->name('cart.destroy');
+        Route::get('/checkout', 'checkout')->name('cart.checkout')->middleware('auth');
     });
 
     Route::controller(PagesController::class)->group(function() {
@@ -83,4 +85,4 @@ Route::name('front.')->group(function(){
     });
 });//End of Front Page Rout
 
-// Auth::routes();
+Auth::routes();

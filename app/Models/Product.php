@@ -51,5 +51,12 @@ class Product extends Model
         return Attribute::get(function($value, $attr) {
             return json_decode($attr['images'], true)[0];
         });
+
     }//End Mehtod
+
+    public function order_details()
+    {
+        return $this->hasMany(OrderDetail::class);
+
+    }//End Method
 }

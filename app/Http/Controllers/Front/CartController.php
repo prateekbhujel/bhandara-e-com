@@ -67,6 +67,25 @@ class CartController extends Controller
 
     }//End Method
 
+
+    public function destroy(Request $request, $id)
+    {
+        $cart = json_decode($request->cookie('bhandara_ecom_cart'), true);
+        unset($cart[$id]);
+
+        if(!empty($cart)) {
+
+            return to_route('front.cart.index')->with('success', 'Item Removed from cart.')->cookie('bhandara_ecom_cart', json_encode($cart), 30 * 60 * 60);
+
+        } else {
+
+            return to_route('front.cart.index')->with('success', 'Cart is empty.')->withoutCookie('bhandara_ecom_cart');
+
+        }
+
+    }//End Method
+
+
     public function total(Request $request)
     {
         $cart = [];
@@ -95,8 +114,10 @@ class CartController extends Controller
 
     }//End Method
 
+    public function checkout()
+    {
 
-
+    }//End Method
 
 
 
