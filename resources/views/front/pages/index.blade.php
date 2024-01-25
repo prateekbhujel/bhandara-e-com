@@ -162,7 +162,7 @@
                     </div>
                     <div class="row">
                         <!-- Product -->
-                        @foreach ($featured as $product)
+                        @foreach ($topSelling as $product)
                             <div class="col-lg-3 col-sm-6 my-3">
                                 <div class="col-12 bg-white text-center h-100 product-item">
                                     <div class="row h-100">

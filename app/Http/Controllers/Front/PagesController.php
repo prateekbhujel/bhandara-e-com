@@ -13,10 +13,12 @@ class PagesController extends Controller
    
     public function index()
     {
-        $featured = Product::whereStatus('Active')->whereFeatured('Yes')->take(4)->inRandomOrder()->get();
-        $latest = Product::whereStatus('Active')->take(4)->latest()->get();
+        $featured   = Product::whereStatus('Active')->whereFeatured('Yes')->take(4)->inRandomOrder()->get();
+        $latest     = Product::whereStatus('Active')->take(4)->latest()->get();
+        $topSelling = Product::whereStatus('Active')->withCount('order_details')->take(4)
+                            ->orderBy('order_details_count', 'desc')->get();
         
-        return view('front.pages.index', compact('featured', 'latest'));
+        return view('front.pages.index', compact('featured', 'latest', 'topSelling'));
 
     } //End Method
 
