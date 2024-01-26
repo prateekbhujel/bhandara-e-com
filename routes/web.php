@@ -4,13 +4,16 @@ use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\PasswordController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ReviewsController;
 use App\Http\Controllers\Admin\StaffsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Route;
 
 /** 
@@ -34,6 +37,10 @@ Route::prefix('admin')->name('admin.')->group(function() {
             Route::match(['put', 'patch'], '/password/update', [PasswordController::class, 'update'])->name('password.update');
 
             Route::resource('staffs', StaffsController::class)->except(['show'])->middleware('admin-access');
+
+            Route::resource('reviews', ReviewsController::class)->only(['index','destroy']);
+            
+            Route::resource('orders', OrdersController::class)->only(['index', 'update', 'destroy']);
 
             Route::resources([
                 'categories' => CategoriesController::class,  
@@ -66,6 +73,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
 //Front Page Routes
 Route::name('front.')->group(function(){
    
+    //Start of CartController
     Route::controller(CartController::class)->group(function() {
         Route::get('/cart', 'index')->name('cart.index');
         Route::post('/cart/{product}/{qty}', 'store')->name('cart.store');
@@ -73,8 +81,10 @@ Route::name('front.')->group(function(){
         Route::get('/cart/total', 'total')->name('cart.total');
         Route::get('cart/{product}/destroy', 'destroy')->name('cart.destroy');
         Route::get('/checkout', 'checkout')->name('cart.checkout')->middleware('auth');
-    });
 
+    });//End Of CartController
+
+    //Start of PagesController
     Route::controller(PagesController::class)->group(function() {
         Route::get('/category/{category}', 'category')->name('pages.category');
         Route::get('/brand/{brand}', 'brand')->name('pages.brand');
@@ -83,7 +93,16 @@ Route::name('front.')->group(function(){
         Route::get('/search', 'search')->name('pages.search');
         Route::get('/','index')->name('pages.index');
         
-    });
+    });//End of PagesController
+
+    //Start of UserController
+    Route::controller(UserController::class)->middleware('auth')->group(function() {
+        Route::get('/user', 'index')->name('user.index');
+        Route::match(['put', 'patch'], '/user', 'update')->name('user.update');
+        Route::match(['put', 'patch'], '/user/password', 'password')->name('user.password');
+
+    });//End of UserController
+
 });//End of Front Page Rout
 
 Auth::routes();

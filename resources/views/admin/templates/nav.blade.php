@@ -39,7 +39,19 @@
                                 <i class="fa-solid fa-user-friends me-2"></i>Users
                             </a>
                         </li>
-                        
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-item {{ request()->routeIs('admin.reviews.index') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">
+                                <i class="fa-solid fa-comments me-2"></i>Reviews
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-item {{ request()->routeIs('admin.orders.index') ? 'active' : '' }}" href="{{ route('admin.orders.index') }}">
+                                <i class="fa-solid fa-shopping-basket me-2"></i>Orders
+                            </a>
+                        </li>
+
                     @endif
                 </ul>
 

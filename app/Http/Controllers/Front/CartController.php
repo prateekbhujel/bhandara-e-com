@@ -149,7 +149,7 @@ class CartController extends Controller
 
         }//End Foreach
 
-        return to_route('front.pages.index')->with('success', 'Thank you for your order. It is currently is been processed.')->withoutCookie('bhandara_ecom_cart');
+        return to_route('front.user.index')->with('success', 'Thank you for your order. It is currently is been processed.')->withoutCookie('bhandara_ecom_cart');
 
     }//End Method
 

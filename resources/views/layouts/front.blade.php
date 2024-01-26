@@ -49,7 +49,7 @@
                                     </li>
                                 @else
                                 <li>
-                                    <a href=""><i class="fas fa-user-circle me-2"></i>{{ auth()->user()->name }}</a>
+                                    <a href="{{ route('front.user.index') }}"><i class="fas fa-user-circle me-2"></i>{{ auth()->user()->name }}</a>
                                 </li>
                                 <li>
                                     <form action="{{ route('logout') }}" method="post" class="d-inline">

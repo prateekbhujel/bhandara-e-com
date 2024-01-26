@@ -15,6 +15,11 @@ class BrandsController extends Controller
     public function index()
     {
         $brands = Brand::paginate(10);
+        
+        if(request()->wantsJson()) 
+        {
+            return $brands;
+        }
 
         return view('admin.brands.index', compact('brands'));
 
@@ -38,6 +43,11 @@ class BrandsController extends Controller
             'name' => 'required|unique:categories,name',
             'status' => 'required|in:Active,Inactive'
         ]));
+                
+        if(request()->wantsJson()) 
+        {
+            return response(['success' =>'Brand created.']);
+        }
 
         return to_route('admin.brands.index')->with('success', 'Brand added.');
 
@@ -62,6 +72,11 @@ class BrandsController extends Controller
             'status' => 'required|in:Active,Inactive'
         ]));
 
+        if($request->wantsJson()) 
+        {
+            return response(['success' => 'Brand Updated.']);
+        }
+
         return to_route('admin.brands.index')->with('success', 'Brand updated.');
 
     }//End Method
@@ -69,9 +84,14 @@ class BrandsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(Request $request, Brand $brand)
     {
         $brand->delete();
+
+        if($request->wantsJson())
+        {
+            return response(['success' => "Brand Deleted."]);
+        }
 
         return to_route('admin.brands.index')->with('success', 'Brand deleted.');
 
